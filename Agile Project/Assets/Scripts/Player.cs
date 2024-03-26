@@ -11,7 +11,7 @@ using UnityEngine;
 public class Player : CharacterGUID
 {
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         // Send a message to SaveLoad that will make a binary file of the passed name of this file.
         //Generate a new game data based on the current game state.

@@ -5,6 +5,8 @@ using UnityEngine;
 public class MenuManager : MonoBehaviour
 {
     public GameObject optionsMenu;
+    public GameObject player;
+    public GameObject weapon;
 
     // Update is called once per frame
     void Update()
@@ -13,6 +15,15 @@ public class MenuManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             optionsMenu.SetActive(!optionsMenu.activeSelf);
+        }
+
+        if (optionsMenu.activeInHierarchy == true)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1.0f;
         }
     }
 
@@ -38,5 +49,11 @@ public class MenuManager : MonoBehaviour
         }
         // Send a message to GameData to set the values of the stored GUID objects position, rotation, health, and mana.
         gd.LoadGUIDData();
+        player.GetComponent<CharacterController>().enabled = false;
+
+        if (weapon.GetComponent<WeaponBase>().hasWeapon == true)
+        {
+            player.GetComponent<PlayerInteraction>().WeaponPickup(weapon);
+        }
     }
 }

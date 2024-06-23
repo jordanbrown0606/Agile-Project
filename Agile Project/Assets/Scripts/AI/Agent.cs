@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class Agent : CharacterGUID, IDamageable
+public class Agent : MonoBehaviour
 {
     [SerializeField, Range(0f, 360f)] protected float _fov = 60f;       //Field of view
     [SerializeField, Range(0f, 1f)] protected float _sightRange = 1f;   //Normalized value for the "sensor" child object's sphere collider
@@ -29,11 +29,6 @@ public class Agent : CharacterGUID, IDamageable
 
     private void Start()
     {
-        if (_isDead)
-        {
-            Destroy(this);
-        }
-
         StateBase[] allStates = GetComponents<StateBase>();
         _navAgent = GetComponent<NavMeshAgent>();
 
@@ -154,21 +149,20 @@ public class Agent : CharacterGUID, IDamageable
     }
 
     //Template for taking damage, more will need to be added
-    public void TakeDamage(int amount)
+    /*public void TakeDamage(int amount)
     {
         _health -= amount;
-
+        
         if (_health <= 0)
         {
             Die();
         }
     }
+    */
 
-    private void Die()
+    public void Die()
     {
         Transition(StateType.Death);
-        isDead = true;
-        //Destroy(gameObject);
     }
 
     /// <summary>
@@ -191,7 +185,7 @@ public class Agent : CharacterGUID, IDamageable
 
         Debug.DrawRay(GetSensorPosition, direction.normalized * GetSensorRadius * _sightRange);
 
-        if (Physics.Raycast(GetSensorPosition, direction.normalized, out hit, GetSensorRadius * _sightRange))
+        if (Physics.Raycast(GetSensorPosition + new Vector3(0, 1.5f, 0), direction.normalized, out hit, GetSensorRadius * _sightRange))
         {
             Debug.Log(hit.collider.gameObject.name);
             return hit.collider == other;

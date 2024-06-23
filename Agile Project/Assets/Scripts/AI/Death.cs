@@ -33,12 +33,11 @@ namespace BetterFSM
             StartCoroutine(DeleteBody());
             return GetStateType;
         }
-
+       
         public IEnumerator DeleteBody()
         {
             yield return new WaitForSeconds(1.5f);
-            Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
         }
-
     }
 }

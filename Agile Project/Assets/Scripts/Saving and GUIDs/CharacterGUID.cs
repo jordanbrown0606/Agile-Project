@@ -8,9 +8,6 @@ public class CharacterGUID : GUIDObject
 {
     [SerializeField] protected int _health;
 
-    protected bool _isDead;
-
     public int Health { get { return _health; } set { _health = value; } }
-    public bool isDead { get { return _isDead; } set { _isDead = value; } }
 }
 

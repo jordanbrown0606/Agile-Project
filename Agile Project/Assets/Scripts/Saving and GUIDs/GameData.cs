@@ -98,6 +98,13 @@ public class DoodadGuidToken : GuidObjectToken
         _position = new VectorToken(go.transform.position);
         _rotation = new VectorToken(go.transform.rotation.eulerAngles);
     }
+
+    public override void LoadGUIDData()
+    {
+        base.LoadGUIDData();
+
+        DoodadGUID go = ObjectRegister.Instance.ReturnObject( _guid).GetComponent<DoodadGUID>();
+    }
 }
 
 /// <summary>
@@ -107,8 +114,6 @@ public class DoodadGuidToken : GuidObjectToken
 public class CharacterGUIDToken : GuidObjectToken
 {
     private int _health;
-
-    private bool _isDead;
     
     public CharacterGUIDToken(CharacterGUID go)
     {
@@ -116,7 +121,6 @@ public class CharacterGUIDToken : GuidObjectToken
         _position = new VectorToken(go.transform.position);
         _rotation = new VectorToken(go.transform.rotation.eulerAngles);
         _health = go.Health;
-        _isDead = go.isDead;
     }
 
     /// <summary>
@@ -129,7 +133,6 @@ public class CharacterGUIDToken : GuidObjectToken
 
         CharacterGUID go = ObjectRegister.Instance.ReturnObject(_guid).GetComponent<CharacterGUID>();
         go.Health = _health;
-        go.isDead = _isDead;
 
     }
 }

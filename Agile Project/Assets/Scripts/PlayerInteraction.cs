@@ -22,10 +22,10 @@ public class PlayerInteraction : MonoBehaviour
 
     private void AttemptInteraction()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position + new Vector3(0, 1.5f, 0), transform.forward, out hit, _maxInteractDistance))
+        RaycastHit playerHit;
+        if (Physics.Raycast(transform.position + new Vector3(0, 1.5f, 0), transform.forward, out playerHit, _maxInteractDistance))
         {
-            GameObject hitObj = hit.transform.gameObject;
+            GameObject hitObj = playerHit.transform.gameObject;
 
             Debug.Log("Hit " + hitObj.name);
             

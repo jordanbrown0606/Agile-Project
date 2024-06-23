@@ -8,7 +8,10 @@ using UnityEngine;
 /// Maybe you should use an input manager instead.
 /// </summary>
 
-public class Player : CharacterGUID
+public class Player : CharacterGUID, IDamageable
 {
-    
+    public void TakeDamage(int amount)
+    {
+        _health -= amount;
+    }
 }

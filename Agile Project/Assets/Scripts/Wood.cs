@@ -18,8 +18,7 @@ public class Wood : CharacterGUID, IDamageable
     {
         if (_health <= 0 )
         {
-            this.gameObject.GetComponent<Renderer>().enabled = false;
-            this.gameObject.GetComponent<BoxCollider>().enabled = false;
+            this.gameObject.SetActive(false);
         }
     }
 }

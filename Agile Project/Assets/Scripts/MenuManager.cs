@@ -51,7 +51,7 @@ public class MenuManager : MonoBehaviour
         gd.LoadGUIDData();
         player.GetComponent<CharacterController>().enabled = false;
 
-        if (weapon.GetComponent<WeaponBase>().hasWeapon == true)
+        if (weapon.GetComponent<WeaponGUID>().HasWeapon == true)
         {
             player.GetComponent<PlayerInteraction>().WeaponPickup(weapon);
         }

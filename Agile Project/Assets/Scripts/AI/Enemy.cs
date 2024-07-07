@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyTest : CharacterGUID, IDamageable
+public class Enemy : CharacterGUID, IDamageable
 {
     public void TakeDamage(int amount)
     {
@@ -19,7 +19,7 @@ public class EnemyTest : CharacterGUID, IDamageable
     {
         if (_health <= 0)
         {
-            this.gameObject.SetActive(false);
+            this.gameObject.GetComponent<Agent>().Die();
         }
     }
 }

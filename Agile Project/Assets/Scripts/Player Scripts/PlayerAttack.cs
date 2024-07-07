@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    [SerializeField] private GameObject _hitBox;
     private Animator _anim;
 
     // Start is called before the first frame update
@@ -29,6 +30,16 @@ public class PlayerAttack : MonoBehaviour
     private void Reset()
     {
        _anim.SetBool("isAttacking", false);
+    }
+
+    public void ActivateHitbox()
+    {
+        _hitBox.SetActive(true);
+    }
+
+    public void DeactivateHitbox()
+    {
+        _hitBox.SetActive(false);
     }
 
     IEnumerator ResetBool()

@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -49,6 +50,15 @@ public class GameData
                 if (doodad != null)
                 {
                     _guidInGame.Add(new DoodadGuidToken(doodad));
+                    continue;
+                }
+            }
+
+            WeaponGUID weapon = ObjectRegister.Instance.ReturnObject(item.Key).GetComponent<WeaponGUID>();
+            {
+                if (weapon != null)
+                {
+                    _guidInGame.Add(new WeaponGUIDToken(weapon));
                     continue;
                 }
             }
@@ -134,6 +144,29 @@ public class CharacterGUIDToken : GuidObjectToken
         CharacterGUID go = ObjectRegister.Instance.ReturnObject(_guid).GetComponent<CharacterGUID>();
         go.Health = _health;
 
+    }
+}
+
+[System.Serializable]
+
+public class WeaponGUIDToken : GuidObjectToken
+{
+    private bool _hasWeapon;
+
+    public WeaponGUIDToken(WeaponGUID go)
+    {
+        _guid = go.GetGUID;
+        _position = new VectorToken(go.transform.transform.position);
+        _rotation = new VectorToken(go.transform.rotation.eulerAngles);
+        _hasWeapon = go.HasWeapon;
+    }
+
+    public override void LoadGUIDData()
+    {
+        base.LoadGUIDData();
+
+        WeaponGUID go = ObjectRegister.Instance.ReturnObject(_guid).GetComponent<WeaponGUID>();
+        go.HasWeapon = _hasWeapon;
     }
 }
 

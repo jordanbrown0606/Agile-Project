@@ -7,6 +7,7 @@ using TMPro;
 public class Keypad : MonoBehaviour
 {
     [SerializeField] private GameObject _player;
+    [SerializeField] private GameObject _exitKey;
 
     private float _btnClicked = 0f;
     private float _numGuesses;
@@ -34,6 +35,7 @@ public class Keypad : MonoBehaviour
                 input = "";
                 _btnClicked = 0f;
                 displayText.text = input.ToString();
+                _exitKey.GetComponent<ItemScript>().Interact(_player);
                 ExitKeypad();
             }
             else

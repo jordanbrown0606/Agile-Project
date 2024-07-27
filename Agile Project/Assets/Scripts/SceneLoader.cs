@@ -12,4 +12,10 @@ public class SceneLoader : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void NewGame(string sceneName)
+    {
+        SaveLoad.Delete("SaveFile");
+        SceneManager.LoadScene(sceneName);
+    }
 }

@@ -446,8 +446,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 995d40cd9b986f2478a21386ff49bcbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _GUID: afda2115-6c4b-495a-b833-77aed83a70f1
-  _health: 5
   _fov: 60
   _sightRange: 1
   _sensor: {fileID: 9140408694991352215}

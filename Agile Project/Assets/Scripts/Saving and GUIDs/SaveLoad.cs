@@ -42,4 +42,16 @@ public static class SaveLoad
 
         return null;
     }
+
+    public static GameData Delete(string fileName)
+    {
+        string path = Application.persistentDataPath + "/" + fileName + ".dat";
+        if (File.Exists(path) == true)
+        {
+            File.Delete(path);
+
+            return null;
+        }
+        return null;
+    }
 }

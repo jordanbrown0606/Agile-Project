@@ -8,6 +8,11 @@ public class MenuManager : MonoBehaviour
     public GameObject player;
     public GameObject weapon;
 
+    private void Start()
+    {
+        StartCoroutine(LoadSaveFile());
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -55,5 +60,11 @@ public class MenuManager : MonoBehaviour
         {
             player.GetComponent<PlayerInteraction>().WeaponPickup(weapon);
         }
+    }
+
+    public IEnumerator LoadSaveFile()
+    {
+        yield return new WaitForFixedUpdate();
+        LoadGame();
     }
 }

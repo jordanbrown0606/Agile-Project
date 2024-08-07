@@ -1,17 +1,20 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ClueSpawn : MonoBehaviour
 {
     [SerializeField] private GameObject _clue;
+    [SerializeField] private Transform _inventory;
 
     // Update is called once per frame
     void Update()
     {
-        if(GetComponent<Enemy>().Health <= 0)
+        if (_clue.transform.position != _inventory.position)
         {
-            StartCoroutine(WaitforSpawn());
+            if (GetComponent<Enemy>().Health <= 0)
+            {
+                StartCoroutine(WaitforSpawn());
+            }
         }
     }
 

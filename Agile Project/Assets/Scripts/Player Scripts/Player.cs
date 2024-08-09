@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -10,8 +11,25 @@ using UnityEngine;
 
 public class Player : CharacterGUID, IDamageable
 {
+    public GameObject deathScreen;
+
     public void TakeDamage(int amount)
     {
         _health -= amount;
+    }
+
+    private void Update()
+    {
+        if (_health <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        GetComponent<CharacterController>().enabled = false;
+        deathScreen.SetActive(true);
+
     }
 }

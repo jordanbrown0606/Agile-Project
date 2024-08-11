@@ -6,6 +6,7 @@ public class LockDoor : DoorGUID, IInteractable
 {
     [SerializeField] private Collider _inventory;
     [SerializeField] private GameObject _key;
+    [SerializeField] private GameObject _needKey;
 
     public Animator doorAnimator;
     public AudioSource source;
@@ -37,7 +38,18 @@ public class LockDoor : DoorGUID, IInteractable
                 source.clip = _isOpen ? openDoor : closeDoor;
                 source.Play();
             }
+            else
+            {
+                _needKey.SetActive(true);
+                StartCoroutine(CloseMenu());
+            }
         }
+    }
+
+    public IEnumerator CloseMenu()
+    {
+        yield return new WaitForSeconds(2);
+        _needKey.SetActive(false);
     }
 
 }

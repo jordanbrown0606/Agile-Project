@@ -30,6 +30,13 @@ namespace BetterFSM
 
         public override StateType OnStateUpdate()
         {
+            if(GetComponent<Enemy>().Health > 0)
+            {
+                _anim.SetBool("isDead", false);
+                _anim.SetBool("isWalking", true);
+                return StateType.Init;
+            }
+
             return GetStateType;
         }      
     }

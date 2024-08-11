@@ -1,3 +1,4 @@
+using BetterFSM;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class Enemy : CharacterGUID, IDamageable
         if (_health <= 0)
         {
             this.gameObject.GetComponent<Agent>().Die();
+            StartCoroutine(MoveBody());
         }
     }
 
@@ -20,6 +22,13 @@ public class Enemy : CharacterGUID, IDamageable
         if (_health <= 0)
         {
             this.gameObject.GetComponent<Agent>().Die();
+            StartCoroutine(MoveBody());
         }
+    }
+
+    public IEnumerator MoveBody()
+    {
+        yield return new WaitForSeconds(1.5f);
+        this.gameObject.SetActive(false);
     }
 }

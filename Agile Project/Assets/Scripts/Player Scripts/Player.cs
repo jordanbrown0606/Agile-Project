@@ -20,7 +20,6 @@ public class Player : CharacterGUID, IDamageable
     public void TakeDamage(int amount)
     {
         _health -= amount;
-        UpdateHealthBar();
     }
 
     private void Update()
@@ -29,6 +28,8 @@ public class Player : CharacterGUID, IDamageable
         {
             Die();
         }
+
+        UpdateHealthBar();
     }
 
     private void Die()
@@ -45,6 +46,12 @@ public class Player : CharacterGUID, IDamageable
         if (_healthBar.value <= 4)
         {
             _sliderFill.color = Color.red;
+        }
+        else
+        {
+           
+           _sliderFill.color = Color.green;
+           
         }
     }
 }

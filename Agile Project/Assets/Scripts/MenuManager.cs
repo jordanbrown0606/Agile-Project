@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MenuManager : MonoBehaviour
 {
+    public GameObject[] enemies;
+
     public GameObject optionsMenu;
     public GameObject player;
     public GameObject weapon;
@@ -59,6 +61,14 @@ public class MenuManager : MonoBehaviour
         if (weapon.GetComponent<WeaponGUID>().HasWeapon == true)
         {
             player.GetComponent<PlayerInteraction>().WeaponPickup(weapon);
+        }
+
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            if (enemies[i].GetComponent<Enemy>().Health > 0)
+            {
+                enemies[i].SetActive(true);
+            }
         }
     }
 

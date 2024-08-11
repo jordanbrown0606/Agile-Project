@@ -13,6 +13,9 @@ public class Inventory : MonoBehaviour
     private bool _lobbyKeyBool;
     private bool _exitKeyBool;
     private bool _safeClueBool;
+    private string _lobbyKeyText;
+    private string _exitKeyText;
+    private string _safeClueText;
 
     public TMP_Text inventoryText;
 
@@ -20,6 +23,9 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         _inventorySpace = GetComponent<Collider>();
+        _lobbyKeyText = _lobbyKey.name.ToString() + "\n";
+        _exitKeyText = _exitKey.name.ToString() + "\n";
+        _safeClueText = _safeClue.name.ToString() + " (F to Toggle)" + "\n";
     }
 
     // Update is called once per frame
@@ -29,29 +35,43 @@ public class Inventory : MonoBehaviour
         {
             if(_lobbyKeyBool == false)
             {
-                inventoryText.text += _lobbyKey.name.ToString() + "\n";
+                inventoryText.text += _lobbyKeyText;
                 _lobbyKeyBool = true;
             }
+        }
+        else
+        {
+            _lobbyKeyBool = false;
+            inventoryText.text = "Inventory: ";
         }
 
         if(_inventorySpace.bounds.Contains(_exitKey.transform.position))
         {
             if(_exitKeyBool == false)
             {
-                inventoryText.text += _exitKey.name.ToString() + "\n";
+                inventoryText.text += _exitKeyText;
                 _exitKeyBool = true;
             }
+        }
+        else
+        {
+            _exitKeyBool = false;
+            inventoryText.text = inventoryText.text.Replace(_exitKeyText, "");
         }
 
         if(_inventorySpace.bounds.Contains(_safeClue.transform.position))
         {
             if(_safeClueBool == false)
             {
-                inventoryText.text += _safeClue.name.ToString() + " (F to Toggle)" + "\n";
+                inventoryText.text += _safeClueText;
                 _safeClueBool = true;
             }
 
-
+        }
+        else
+        {
+            _safeClueBool = false;
+            inventoryText.text = inventoryText.text.Replace(_safeClueText, ""); ;
         }
     }
 }

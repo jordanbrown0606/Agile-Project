@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Handles the save and load.
@@ -11,11 +12,15 @@ using UnityEngine;
 
 public class Player : CharacterGUID, IDamageable
 {
+    [SerializeField] private Slider _healthBar;
+    [SerializeField] private Image _sliderFill;
+
     public GameObject deathScreen;
 
     public void TakeDamage(int amount)
     {
         _health -= amount;
+        UpdateHealthBar();
     }
 
     private void Update()
@@ -31,5 +36,15 @@ public class Player : CharacterGUID, IDamageable
         GetComponent<CharacterController>().enabled = false;
         deathScreen.SetActive(true);
 
+    }
+
+    private void UpdateHealthBar()
+    {
+        _healthBar.value = _health;
+
+        if (_healthBar.value <= 4)
+        {
+            _sliderFill.color = Color.red;
+        }
     }
 }

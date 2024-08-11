@@ -32,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
             Vector3 movDir;
 
             _anim.SetFloat("Vertical", Input.GetAxis("Vertical"));
+            _anim.SetFloat("Horizontal", Input.GetAxis("Horizontal"));
 
             transform.Rotate(0, Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime, 0);
             movDir = transform.forward * Input.GetAxis("Vertical") * speed;

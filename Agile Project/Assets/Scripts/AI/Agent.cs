@@ -148,18 +148,6 @@ public class Agent : MonoBehaviour
         }
     }
 
-    //Template for taking damage, more will need to be added
-    /*public void TakeDamage(int amount)
-    {
-        _health -= amount;
-        
-        if (_health <= 0)
-        {
-            Die();
-        }
-    }
-    */
-
     public void Die()
     {
         Transition(StateType.Death);

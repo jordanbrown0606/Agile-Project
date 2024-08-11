@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Door : MonoBehaviour, IInteractable
+public class Door : DoorGUID, IInteractable
 {
     public Animator doorAnimator;
-
-    private bool _isOpen = false;
+    public AudioSource source;
+    public AudioClip openDoor, closeDoor;
 
     public void DoorInteraction()
     {
@@ -29,6 +29,8 @@ public class Door : MonoBehaviour, IInteractable
         if (objAttemptingInteraction.tag == "Player")
         {
             DoorInteraction();
+            source.clip = _isOpen ? openDoor : closeDoor;
+            source.Play();
         }
     }
 }

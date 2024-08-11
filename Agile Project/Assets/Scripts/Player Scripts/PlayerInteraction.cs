@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
@@ -7,12 +8,33 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private float _maxInteractDistance;
     [SerializeField] private Transform _weaponHoldPoint;
     [SerializeField] private GameObject _curWeapon;
+    [SerializeField] private GameObject _interactButton;
+
+    private GameObject _player;
     public GameObject CurWeapon { get { return _curWeapon; } }
+
+    private void Start()
+    {
+        _player = this.gameObject;
+    }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.DrawRay(transform.position + new Vector3(0, 1.5f, 0), transform.forward, Color.red);
+        RaycastHit interaction;
+        if (Physics.Raycast(transform.position + new Vector3(0, 1.5f, 0), transform.forward, out interaction, _maxInteractDistance))
+        {
+            GameObject hitObj = interaction.transform.gameObject;
+
+            if (hitObj.GetComponent<IInteractable>() != null && !hitObj.transform.IsChildOf(_player.transform))
+            {
+                _interactButton.SetActive(true);
+            }
+            else
+            {
+                _interactButton.SetActive(false);
+            }
+        }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -43,10 +65,6 @@ public class PlayerInteraction : MonoBehaviour
     /// </summary>
     public void WeaponPickup(GameObject weaponToPickup)
     {
-        if (_curWeapon != null)
-        {
-            return;
-        }
 
         _curWeapon = weaponToPickup;
 

@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LockDoor : MonoBehaviour, IInteractable
+public class LockDoor : DoorGUID, IInteractable
 {
     [SerializeField] private Collider _inventory;
     [SerializeField] private GameObject _key;
 
     public Animator doorAnimator;
-
-    private bool _isOpen = false;
+    public AudioSource source;
+    public AudioClip openDoor, closeDoor;
 
     public void DoorInteraction()
     {
@@ -34,6 +34,8 @@ public class LockDoor : MonoBehaviour, IInteractable
             if (_inventory.bounds.Contains(_key.transform.position))
             {
                 DoorInteraction();
+                source.clip = _isOpen ? openDoor : closeDoor;
+                source.Play();
             }
         }
     }

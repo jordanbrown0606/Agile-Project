@@ -62,6 +62,15 @@ public class GameData
                     continue;
                 }
             }
+
+            DoorGUID door = ObjectRegister.Instance.ReturnObject(item.Key).GetComponent<DoorGUID>();
+            {
+                if (door != null)
+                {
+                    _guidInGame.Add(new DoorGUIDToken(door));
+                    continue;
+                }
+            }
         }
     }
 }
@@ -167,6 +176,28 @@ public class WeaponGUIDToken : GuidObjectToken
 
         WeaponGUID go = ObjectRegister.Instance.ReturnObject(_guid).GetComponent<WeaponGUID>();
         go.HasWeapon = _hasWeapon;
+    }
+}
+
+[System.Serializable]
+
+public class DoorGUIDToken : GuidObjectToken
+{
+    private bool _isOpen;
+    public DoorGUIDToken(DoorGUID go)
+    {
+        _guid = go.GetGUID;
+        _position = new VectorToken(go.transform.transform.position);
+        _rotation = new VectorToken(go.transform.rotation.eulerAngles);
+        _isOpen = go.IsOpen;
+    }
+
+    public override void LoadGUIDData()
+    {
+        base.LoadGUIDData();
+
+        DoorGUID go = ObjectRegister.Instance.ReturnObject(_guid).GetComponent<DoorGUID>();
+        go.IsOpen = _isOpen;
     }
 }
 

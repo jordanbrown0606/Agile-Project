@@ -7,6 +7,8 @@ namespace DoorScript
 
 
 public class Door : MonoBehaviour, IInteractable {
+
+	
 	public bool open;
 	public float smooth = 1.0f;
 	float DoorOpenAngle = 90.0f;

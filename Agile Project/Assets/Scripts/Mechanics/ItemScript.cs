@@ -5,8 +5,15 @@ using TMPro;
 
 public class ItemScript : DoodadGUID, IInteractable
 {
-    
+    [SerializeField] AudioClip _pickup;
+    private AudioSource _source;
     public Transform inventorySpot;
+
+    private void Start()
+    {
+        _source = GetComponent<AudioSource>();
+        _source.clip = _pickup;
+    }
 
 
     public void Interact(GameObject objAttemptingInteraction)
@@ -14,6 +21,8 @@ public class ItemScript : DoodadGUID, IInteractable
         if (objAttemptingInteraction != null)
         {
             transform.position = inventorySpot.position;
+            _source.Play();
+            
         }
     }
 }

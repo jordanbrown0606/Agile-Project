@@ -30,14 +30,7 @@ namespace BetterFSM
 
         public override StateType OnStateUpdate()
         {
-            StartCoroutine(DeleteBody());
             return GetStateType;
-        }
-       
-        public IEnumerator DeleteBody()
-        {
-            yield return new WaitForSeconds(1.5f);
-            this.gameObject.SetActive(false);
-        }
+        }      
     }
 }

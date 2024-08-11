@@ -13,9 +13,16 @@ namespace BetterFSM
 
         public override StateType OnStateUpdate()
         {
-            // Character is set up.
-            // Allow it to go to actual game mode
-            return StateType.Patrol;
+            if (this.GetComponent<Enemy>().Health <= 0)
+            {
+                return StateType.Death;
+            }
+            else
+            {
+                // Character is set up.
+                // Allow it to go to actual game mode
+                return StateType.Patrol;
+            }
         }
     }
 }
